@@ -1,5 +1,6 @@
 import { graphql, useLazyLoadQuery } from "react-relay";
 import type { AppQuery } from "./__generated__/AppQuery.graphql";
+import { Typography } from "@mui/material";
 
 function App() {
   const AppQuery = graphql`
@@ -12,7 +13,7 @@ function App() {
 
   const data = useLazyLoadQuery<AppQuery>(AppQuery, {});
 
-  return <h1>{data.viewer?.login}</h1>;
+  return <Typography>{data.viewer?.login}</Typography>;
 }
 
 export default App;
