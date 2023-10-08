@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aad0ea00f34ffbc2b79d77e9f8a2ef6f>>
+ * @generated SignedSource<<57bff4d7fdfb6122875bc2dba01e31a1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,24 +9,31 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-import { FragmentRefs } from "relay-runtime";
-export type AppQuery$variables = {};
-export type AppQuery$data = {
+export type AppAccountPageQuery$variables = {};
+export type AppAccountPageQuery$data = {
   readonly viewer: {
-    readonly " $fragmentSpreads": FragmentRefs<"AccountPage_user">;
+    readonly login: string;
   };
 };
-export type AppQuery = {
-  response: AppQuery$data;
-  variables: AppQuery$variables;
+export type AppAccountPageQuery = {
+  response: AppAccountPageQuery$data;
+  variables: AppAccountPageQuery$variables;
 };
 
-const node: ConcreteRequest = {
+const node: ConcreteRequest = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "login",
+  "storageKey": null
+};
+return {
   "fragment": {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "AppQuery",
+    "name": "AppAccountPageQuery",
     "selections": [
       {
         "alias": null,
@@ -36,11 +43,7 @@ const node: ConcreteRequest = {
         "name": "viewer",
         "plural": false,
         "selections": [
-          {
-            "args": null,
-            "kind": "FragmentSpread",
-            "name": "AccountPage_user"
-          }
+          (v0/*: any*/)
         ],
         "storageKey": null
       }
@@ -52,7 +55,7 @@ const node: ConcreteRequest = {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "AppQuery",
+    "name": "AppAccountPageQuery",
     "selections": [
       {
         "alias": null,
@@ -62,13 +65,7 @@ const node: ConcreteRequest = {
         "name": "viewer",
         "plural": false,
         "selections": [
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "login",
-            "storageKey": null
-          },
+          (v0/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -82,15 +79,16 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "63bbd319b7f6e48a3860d61f74a8010d",
+    "cacheID": "be440ef4814c572b657274d2c4919221",
     "id": null,
     "metadata": {},
-    "name": "AppQuery",
+    "name": "AppAccountPageQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  viewer {\n    ...AccountPage_user\n    id\n  }\n}\n\nfragment AccountPage_user on User {\n  login\n}\n"
+    "text": "query AppAccountPageQuery {\n  viewer {\n    login\n    id\n  }\n}\n"
   }
 };
+})();
 
-(node as any).hash = "666189461a5873cb871aaff39db5ba34";
+(node as any).hash = "b9752de3ef9062cbccf1472ad2ec983d";
 
 export default node;

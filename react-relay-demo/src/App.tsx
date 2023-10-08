@@ -1,7 +1,18 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
+import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
+import { AppQuery } from "./__generated__/AppQuery.graphql";
 import AccountPage from "./pages/AccountPage";
 import IssuesPage from "./pages/IssuesPage";
+
+interface Props {
+  initialQueryRef: PreloadedQuery<AppQuery>
+}
+
+enum TabNames {
+  ISSUES = "ISSUES",
+  ACCOUNT = "ACCOUNT",
+}
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,33 +33,50 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box p={3}>
-          <Typography>{children}</Typography>
+          <div>{children}</div>
         </Box>
       )}
     </div>
   );
 }
 
-function App() {
-  const [value, setValue] = useState(0);
+function App(props: Props) {
+  const [currentTab, setCurrentTab] = useState<TabNames>(TabNames.ISSUES);
+  
+  const data = usePreloadedQuery(
+    graphql`
+      query AppQuery {
+        viewer {
+          ...AccountPage_user
+        }
+      }
+    `,
+    props.initialQueryRef
+  );
 
-  const handleChange = (_event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
+
+  const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
+    setCurrentTab(newValue as TabNames);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="app tabs" centered>
-          <Tab label="Issues" />
-          <Tab label="Account" />
+    <Box sx={{ width: "100%" }}>
+      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Tabs
+          value={currentTab}
+          onChange={handleChange}
+          aria-label="app tabs"
+          centered
+        >
+          <Tab label="Issues" value={TabNames.ISSUES} />
+          <Tab label="Account" value={TabNames.ACCOUNT} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={currentTab} index={TabNames.ISSUES}>
         <IssuesPage />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <AccountPage />
+      <TabPanel value={currentTab} index={TabNames.ACCOUNT}>
+        <AccountPage user={data.viewer} />
       </TabPanel>
     </Box>
   );

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aad0ea00f34ffbc2b79d77e9f8a2ef6f>>
+ * @generated SignedSource<<09fa2064a7d53721cf457f119bd67215>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,15 +10,15 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type AppQuery$variables = {};
-export type AppQuery$data = {
+export type AccountPageQuery$variables = {};
+export type AccountPageQuery$data = {
   readonly viewer: {
-    readonly " $fragmentSpreads": FragmentRefs<"AccountPage_user">;
+    readonly " $fragmentSpreads": FragmentRefs<"AccountHeader_user">;
   };
 };
-export type AppQuery = {
-  response: AppQuery$data;
-  variables: AppQuery$variables;
+export type AccountPageQuery = {
+  response: AccountPageQuery$data;
+  variables: AccountPageQuery$variables;
 };
 
 const node: ConcreteRequest = {
@@ -26,7 +26,7 @@ const node: ConcreteRequest = {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "AppQuery",
+    "name": "AccountPageQuery",
     "selections": [
       {
         "alias": null,
@@ -39,7 +39,7 @@ const node: ConcreteRequest = {
           {
             "args": null,
             "kind": "FragmentSpread",
-            "name": "AccountPage_user"
+            "name": "AccountHeader_user"
           }
         ],
         "storageKey": null
@@ -52,7 +52,7 @@ const node: ConcreteRequest = {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "AppQuery",
+    "name": "AccountPageQuery",
     "selections": [
       {
         "alias": null,
@@ -73,6 +73,13 @@ const node: ConcreteRequest = {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
+            "name": "avatarUrl",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "id",
             "storageKey": null
           }
@@ -82,15 +89,15 @@ const node: ConcreteRequest = {
     ]
   },
   "params": {
-    "cacheID": "63bbd319b7f6e48a3860d61f74a8010d",
+    "cacheID": "8f6cb2c4a1eca60128ac340f451e5c43",
     "id": null,
     "metadata": {},
-    "name": "AppQuery",
+    "name": "AccountPageQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  viewer {\n    ...AccountPage_user\n    id\n  }\n}\n\nfragment AccountPage_user on User {\n  login\n}\n"
+    "text": "query AccountPageQuery {\n  viewer {\n    ...AccountHeader_user\n    id\n  }\n}\n\nfragment AccountHeader_user on User {\n  login\n  avatarUrl\n}\n"
   }
 };
 
-(node as any).hash = "666189461a5873cb871aaff39db5ba34";
+(node as any).hash = "66c6019135c9488f3ba68a076e555b9c";
 
 export default node;
