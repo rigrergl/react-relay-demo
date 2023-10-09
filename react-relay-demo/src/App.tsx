@@ -1,5 +1,5 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import { useState } from "react";
+import { startTransition, useState, useTransition } from "react";
 import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 import { AppQuery } from "./__generated__/AppQuery.graphql";
 import AccountPage from "./pages/AccountPage";
@@ -41,7 +41,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 function App(props: Props) {
-  const [currentTab, setCurrentTab] = useState<TabNames>(TabNames.ISSUES);
+  const [currentTab, setCurrentTab] = useState<TabNames>(TabNames.ACCOUNT);
   
   const data = usePreloadedQuery(
     graphql`
@@ -56,7 +56,9 @@ function App(props: Props) {
 
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
-    setCurrentTab(newValue as TabNames);
+    startTransition(() => {
+      setCurrentTab(newValue as TabNames);
+    });
   };
 
   return (
@@ -68,8 +70,8 @@ function App(props: Props) {
           aria-label="app tabs"
           centered
         >
-          <Tab label="Issues" value={TabNames.ISSUES} />
           <Tab label="Account" value={TabNames.ACCOUNT} />
+          <Tab label="Issues" value={TabNames.ISSUES} />
         </Tabs>
       </Box>
       <TabPanel value={currentTab} index={TabNames.ISSUES}>
