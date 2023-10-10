@@ -1,3 +1,4 @@
+import EditIcon from "@mui/icons-material/Edit";
 import {
   Button,
   Container,
@@ -8,10 +9,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
 import { graphql, useFragment, useMutation } from "react-relay";
 import { AccountPage_user$key } from "./__generated__/AccountPage_user.graphql";
-import { useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
 
 interface Props {
   user: AccountPage_user$key;
@@ -31,14 +31,16 @@ const AccountPage = (props: Props) => {
   );
 
   const [commitUpdateUserStatus, isInFlight] = useMutation(graphql`
-  mutation AccountPageUpdateUserStatusMutation($input: ChangeUserStatusInput!) {
-    changeUserStatus(input: $input) {
-      status {
-        message
+    mutation AccountPageUpdateUserStatusMutation(
+      $input: ChangeUserStatusInput!
+    ) {
+      changeUserStatus(input: $input) {
+        status {
+          message
+        }
       }
     }
-  }
-`);
+  `);
 
   // State for managing the dialog box and edited bio
   const [open, setOpen] = useState(false);
@@ -96,16 +98,16 @@ const AccountPage = (props: Props) => {
                 variables: {
                   input: {
                     message: editedStatus,
-                    clientMutationId: "someRandomString"
+                    clientMutationId: "someRandomString",
                   },
                 },
                 optimisticResponse,
                 onCompleted: (response) => {
-                  console.log('Response received from server:', response);
+                  console.log("Response received from server:", response);
                 },
                 onError: (err) => {
-                  console.error('Error updating user status:', err);
-                }
+                  console.error("Error updating user status:", err);
+                },
               });
               handleClose();
             }}

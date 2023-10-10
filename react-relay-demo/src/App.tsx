@@ -1,12 +1,12 @@
 import { Box, Tab, Tabs } from "@mui/material";
-import { startTransition, useState, useTransition } from "react";
+import { startTransition, useState } from "react";
 import { PreloadedQuery, graphql, usePreloadedQuery } from "react-relay";
 import { AppQuery } from "./__generated__/AppQuery.graphql";
 import AccountPage from "./pages/AccountPage";
 import IssuesPage from "./pages/IssuesPage";
 
 interface Props {
-  initialQueryRef: PreloadedQuery<AppQuery>
+  initialQueryRef: PreloadedQuery<AppQuery>;
 }
 
 enum TabNames {
@@ -42,7 +42,7 @@ function TabPanel(props: TabPanelProps) {
 
 function App(props: Props) {
   const [currentTab, setCurrentTab] = useState<TabNames>(TabNames.ACCOUNT);
-  
+
   const data = usePreloadedQuery(
     graphql`
       query AppQuery {
@@ -53,7 +53,6 @@ function App(props: Props) {
     `,
     props.initialQueryRef
   );
-
 
   const handleChange = (_event: React.ChangeEvent<{}>, newValue: string) => {
     startTransition(() => {

@@ -2,8 +2,8 @@ import { Container, Typography } from "@mui/material";
 import { Suspense } from "react";
 import { useLazyLoadQuery } from "react-relay";
 import { graphql } from "relay-runtime";
-import { IssuesPageQuery } from "./__generated__/IssuesPageQuery.graphql";
 import IssueList from "../components/IssueList";
+import { IssuesPageQuery } from "./__generated__/IssuesPageQuery.graphql";
 
 const IssuesPage = () => {
   const query = graphql`
