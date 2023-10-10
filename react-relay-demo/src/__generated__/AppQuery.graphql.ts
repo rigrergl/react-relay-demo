@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<aad0ea00f34ffbc2b79d77e9f8a2ef6f>>
+ * @generated SignedSource<<d0243756f8bddcddb03bc224adc049e8>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -21,7 +21,15 @@ export type AppQuery = {
   variables: AppQuery$variables;
 };
 
-const node: ConcreteRequest = {
+const node: ConcreteRequest = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "fragment": {
     "argumentDefinitions": [],
     "kind": "Fragment",
@@ -72,24 +80,38 @@ const node: ConcreteRequest = {
           {
             "alias": null,
             "args": null,
-            "kind": "ScalarField",
-            "name": "id",
+            "concreteType": "UserStatus",
+            "kind": "LinkedField",
+            "name": "status",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "message",
+                "storageKey": null
+              },
+              (v0/*: any*/)
+            ],
             "storageKey": null
-          }
+          },
+          (v0/*: any*/)
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "63bbd319b7f6e48a3860d61f74a8010d",
+    "cacheID": "84d7ab3071d76751cd4224d72da4bf05",
     "id": null,
     "metadata": {},
     "name": "AppQuery",
     "operationKind": "query",
-    "text": "query AppQuery {\n  viewer {\n    ...AccountPage_user\n    id\n  }\n}\n\nfragment AccountPage_user on User {\n  login\n}\n"
+    "text": "query AppQuery {\n  viewer {\n    ...AccountPage_user\n    id\n  }\n}\n\nfragment AccountPage_user on User {\n  login\n  status {\n    message\n    id\n  }\n}\n"
   }
 };
+})();
 
 (node as any).hash = "666189461a5873cb871aaff39db5ba34";
 
