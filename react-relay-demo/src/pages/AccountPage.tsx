@@ -30,7 +30,7 @@ const AccountPage = (props: Props) => {
     props.user
   );
 
-  const [commitUpdateUserStatus, isInFlight] = useMutation(graphql`
+  const [commitUpdateUserStatus, _isInFlight] = useMutation(graphql`
     mutation AccountPageUpdateUserStatusMutation(
       $input: ChangeUserStatusInput!
     ) {
