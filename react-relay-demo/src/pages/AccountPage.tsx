@@ -47,6 +47,14 @@ const AccountPage = (props: Props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const optimisticResponse = {
+    changeUserStatus: {
+      status: {
+        message: editedStatus,
+      },
+    },
+  };
+
   return (
     <Container>
       <Typography variant="h6">Username</Typography>
@@ -91,6 +99,7 @@ const AccountPage = (props: Props) => {
                     clientMutationId: "someRandomString"
                   },
                 },
+                optimisticResponse,
                 onCompleted: (response) => {
                   console.log('Response received from server:', response);
                 },
